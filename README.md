@@ -4,6 +4,7 @@
 ![Python](https://img.shields.io/badge/language-Python-blue?logo=python)
 [![PyPI Version](https://img.shields.io/pypi/v/pyramid_math)](https://pypi.org/project/pyramid-math/)
 
+
 `pyramid_math` is a Python package for analyzing the geometrical properties and mathematical constants of pyramids. It provides tools for calculating various attributes such as apothem, edge length, slope angle, and comparisons with mathematical constants like π (Pi), φ (Golden Ratio), and Tribonacci constant. The package includes a predefined database of famous pyramids (e.g., Great Pyramid of Giza, Pyramid of Khafre, and more) and supports user-defined custom pyramids with specific measurements.
 
 The package is designed for educational purposes, historical research, and exploring the mathematical connections of ancient pyramids. It can be used to perform detailed analysis, comparisons, and special calculations on pyramids, making it a valuable tool for students, researchers, and enthusiasts interested in pyramid geometry and mathematical relationships.
@@ -89,6 +90,9 @@ print(special_calcs)
     'difference_from_pi': 0.0000,
     'difference_from_phi': 0.0000,
     'slope_angle': 26.5651
+    'my_method_1_pi':3.0000,
+    'my_method_2_pi':3.0000,
+    'my_method_golden_ratio':1.6180
 }
 ```
 
