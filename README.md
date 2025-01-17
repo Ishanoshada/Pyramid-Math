@@ -184,6 +184,8 @@ Difference from φ - 1 = 0.0000
 
 Note: In this package, **CG** refers to the **diagonal** of the pyramid, not the center of gravity. This is used in comparisons to constants like √2 and Tribonacci.
 
+**Repository Views** ![Views](https://profile-counter.glitch.me/pyramidmath/count.svg)
+
 ## Contributing
 
 Feel free to contribute by creating pull requests, reporting issues, or submitting feature requests.

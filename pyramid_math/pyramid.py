@@ -28,6 +28,46 @@ class Pyramid:
             height=data["height"]
         )
 
+    def pi_ratio(self):
+        return round(self.base_length_north / self.height, 4)
+
+    # Method to calculate golden ratio (approximate)
+    def golden_ratio(self):
+        return round(self.base_length_north / self.height, 4)
+
+    # Static method to compare two pyramids by name
+    @staticmethod
+    def compare_pyramids(pyramid1_name, pyramid2_name):
+        # Fetch pyramid data from database
+        pyramid1 = PYRAMID_DATABASE.get(pyramid1_name)
+        pyramid2 = PYRAMID_DATABASE.get(pyramid2_name)
+
+        if not pyramid1 or not pyramid2:
+            raise ValueError("One or both pyramid names are invalid.")
+        
+        # Create Pyramid objects for each pyramid name
+        p1 = Pyramid(pyramid1["name"], pyramid1["base_length_north"], pyramid1["base_length_east"], pyramid1["height"])
+        p2 = Pyramid(pyramid2["name"], pyramid2["base_length_north"], pyramid2["base_length_east"], pyramid2["height"])
+
+        # Compare their properties and create a comparison dictionary
+        comparison = {
+            p1.name: {
+                'height': p1.height,
+                'base_length': p1.base_length_north,
+                'slope_angle': calculate_slope_angle(p1.base_length_north, p1.height),
+                'pi_ratio': p1.pi_ratio(),
+                'golden_ratio': p1.golden_ratio()
+            },
+            p2.name: {
+                'height': p2.height,
+                'base_length': p2.base_length_north,
+                'slope_angle': calculate_slope_angle(p2.base_length_north, p2.height),
+                'pi_ratio': p2.pi_ratio(),
+                'golden_ratio': p2.golden_ratio()
+            }
+        }
+
+        return comparison
     def perform_special_calculations(self):
         pivalue = (self.base_length_north + self.base_length_east) / self.height
         goldenratio = calculate_edge(self.base_length_north, self.height) / (self.base_length_north / 2)
