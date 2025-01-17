@@ -5,7 +5,7 @@ from .geometry import (
     calculate_diagonal,
     np
 )
-import math
+import math,json
 from .constants import PHI, PI
 from .database import PYRAMID_DATABASE
 
@@ -146,70 +146,109 @@ class Pyramid:
         difference = abs(ratio - sqrt_2)
         return ratio, difference
 
-    def detailed_analysis(self):
+    @staticmethod
+    def list_pyramids():
+        return {pid: data["name"] for pid, data in PYRAMID_DATABASE.items()}
+
+    def detailed_analysis(self, json=False):
         """
         Comprehensive analysis of the pyramid with constant comparisons
         """
         # Perform special calculations
         special_calcs = self.perform_special_calculations()
 
-        print(f"Detailed Analysis of {self.name}:")
-        print("\nMeasurements and Calculated Values:")
-        print(f"North Base Length: {self.base_length_north:.2f} ft")
-        print(f"Eastern Base Length: {self.base_length_east:.2f} ft")
-        print(f"Height: {self.height:.2f} ft")
+        analysis = {
+            "name": self.name,
+            "measurements": {
+                "north_base_length": round(self.base_length_north, 2),
+                "eastern_base_length": round(self.base_length_east, 2),
+                "height": round(self.height, 2)
+            },
+            "special_calculations": {}
+        }
 
-        print("\nSpecial Calculations vs Mathematical Constants:")
-        
         # Pi Value Comparison
-        print(f"(North base + Eastern base) / Height = {special_calcs['pivalue']:.4f}")
-        print(f"Actual π value = {math.pi:.4f}")
-        print(f"Difference from π = {abs(special_calcs['pivalue'] - math.pi):.4f}")
+        analysis["special_calculations"]["pi_value"] = {
+            "calculated": round(special_calcs['pivalue'], 4),
+            "actual": round(math.pi, 4),
+            "difference_from_pi": round(abs(special_calcs['pivalue'] - math.pi), 4)
+        }
 
         # Golden Ratio Comparison
-        print(f"Edge / (Base length / 2) = {special_calcs['goldenratio']:.4f}")
-        phi = (1 + np.sqrt(5)) / 2  # Golden ratio
-        print(f"Actual φ (Golden Ratio) = {phi:.4f}")
-        print(f"Difference from φ = {abs(special_calcs['goldenratio'] - phi):.4f}")
+        phi = (1 + np.sqrt(5)) / 2
+        analysis["special_calculations"]["golden_ratio"] = {
+            "calculated": round(special_calcs['goldenratio'], 4),
+            "actual": round(phi, 4),
+            "difference_from_phi": round(abs(special_calcs['goldenratio'] - phi), 4)
+        }
 
         # Square Root of Golden Ratio Comparison
-        print(f"Apothem / Height = {special_calcs['sqrt_goldenratio']:.4f}")
         sqrt_phi = np.sqrt(phi)
-        print(f"Actual √φ = {sqrt_phi:.4f}")
-        print(f"Difference from √φ = {abs(special_calcs['sqrt_goldenratio'] - sqrt_phi):.4f}")
+        analysis["special_calculations"]["sqrt_golden_ratio"] = {
+            "calculated": round(special_calcs['sqrt_goldenratio'], 4),
+            "actual": round(sqrt_phi, 4),
+            "difference_from_sqrt_phi": round(abs(special_calcs['sqrt_goldenratio'] - sqrt_phi), 4)
+        }
 
         # Slope Angle
-        print(f"\nPyramid Slope Angle: {special_calcs['slope_angle']:.2f} degrees")
+        analysis["special_calculations"]["slope_angle"] = round(special_calcs['slope_angle'], 2)
 
         # CG and Base Length Comparison
         cg_ratio, cg_difference = self.compare_CG_base_length()
-        print(f"calculate_diagonal  (CG) / Base Length = {cg_ratio:.4f}")
-        print(f"Difference from √2 = {cg_difference:.4f}")
+        analysis["special_calculations"]["cg_base_length_comparison"] = {
+            "calculated": round(cg_ratio, 4),
+            "difference_from_sqrt2": round(cg_difference, 4)
+        }
 
         # Tribonacci Constant Calculation and Comparison
         tribonacci_constant, tribonacci_difference = self.compare_tribonacci_constant()
-        print(f"\nCalculated Tribonacci Constant = {tribonacci_constant:.4f}")
-        print(f"Actual Tribonacci Constant = 1.8393")
-        print(f"Difference from Tribonacci Constant = {tribonacci_difference:.4f}")
+        analysis["special_calculations"]["tribonacci_constant"] = {
+            "calculated": round(tribonacci_constant, 4),
+            "actual": 1.8393,
+            "difference_from_tribonacci_constant": round(tribonacci_difference, 4)
+        }
 
         # Root 5 Calculation and Comparison
         root_5_ratio, root_5_difference = self.compare_root_5()
-        print(f"\n(Base Length + Apothem) / Apothem = {root_5_ratio:.4f}")
-        print(f"Actual √5 = {np.sqrt(5):.4f}")
-        print(f"Difference from √5 = {root_5_difference:.4f}")
+        analysis["special_calculations"]["root_5_comparison"] = {
+            "calculated": round(root_5_ratio, 4),
+            "actual": round(np.sqrt(5), 4),
+            "difference_from_sqrt5": round(root_5_difference, 4)
+        }
 
         # Root 3 Calculation and Comparison
         root_3_ratio, root_3_difference = self.compare_root_3()
-        print(f"\n(Height + CG + CG) / (North Base + Eastern Base) = {root_3_ratio:.4f}")
-        print(f"Actual √3 = {np.sqrt(3):.4f}")
-        print(f"Difference from √3 = {root_3_difference:.4f}")
+        analysis["special_calculations"]["root_3_comparison"] = {
+            "calculated": round(root_3_ratio, 4),
+            "actual": round(np.sqrt(3), 4),
+            "difference_from_sqrt3": round(root_3_difference, 4)
+        }
 
         # Golden Ratio - 1 Comparison
         golden_ratio_minus_1_ratio, golden_ratio_minus_1_difference = self.compare_golden_ratio_minus_1()
-        print(f"\nApothem / (Apothem + Half Base Length) = {golden_ratio_minus_1_ratio:.4f}")
-        print(f"Actual φ - 1 = {phi - 1:.4f}")
-        print(f"Difference from φ - 1 = {golden_ratio_minus_1_difference:.4f}")
+        analysis["special_calculations"]["golden_ratio_minus_1_comparison"] = {
+            "calculated": round(golden_ratio_minus_1_ratio, 4),
+            "actual": round(phi - 1, 4),
+            "difference_from_phi_minus_1": round(golden_ratio_minus_1_difference, 4)
+        }
 
-    @staticmethod
-    def list_pyramids():
-        return {pid: data["name"] for pid, data in PYRAMID_DATABASE.items()}
+        # Return JSON if specified
+        if json:
+            return analysis  # Ensure json is not overridden
+        else:
+            # Otherwise, print analysis (same as before)
+            print(f"Detailed Analysis of {self.name}:")
+            print("\nMeasurements and Calculated Values:")
+            for key, value in analysis["measurements"].items():
+                print(f"{key.replace('_', ' ').capitalize()}: {value:.2f} ft")
+
+            print("\nSpecial Calculations vs Mathematical Constants:")
+            for key, value in analysis["special_calculations"].items():
+                print(f"\n{key.replace('_', ' ').capitalize()}:")
+                if isinstance(value, dict):
+                    for sub_key, sub_value in value.items():
+                        print(f"  {sub_key.replace('_', ' ').capitalize()}: {sub_value:.4f}")
+                else:
+                    print(f"  {key.replace('_', ' ').capitalize()}: {value:.4f}")
+
+            return None

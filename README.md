@@ -1,6 +1,31 @@
 # PyramidMath - A Python Package for Pyramid Geometry and Mathematical Constants
 
-`pyramid_math` is a Python package for analyzing the geometrical properties and mathematical constants of pyramids. It provides tools for calculating various attributes such as apothem, edge length, slope angle, and comparisons with mathematical constants like π (Pi), φ (Golden Ratio), and Tribonacci constant.
+![Pyramids](https://img.shields.io/badge/Pyramids-Exploration-brightgreen)
+![Python](https://img.shields.io/badge/language-Python-blue?logo=python)
+[![PyPI Version](https://img.shields.io/pypi/v/pyramid_math)](https://pypi.org/project/pyramid-math/)
+
+`pyramid_math` is a Python package for analyzing the geometrical properties and mathematical constants of pyramids. It provides tools for calculating various attributes such as apothem, edge length, slope angle, and comparisons with mathematical constants like π (Pi), φ (Golden Ratio), and Tribonacci constant. The package includes a predefined database of famous pyramids (e.g., Great Pyramid of Giza, Pyramid of Khafre, and more) and supports user-defined custom pyramids with specific measurements.
+
+The package is designed for educational purposes, historical research, and exploring the mathematical connections of ancient pyramids. It can be used to perform detailed analysis, comparisons, and special calculations on pyramids, making it a valuable tool for students, researchers, and enthusiasts interested in pyramid geometry and mathematical relationships.
+
+![imgpyr](https://raw.githubusercontent.com/Ishanoshada/Ishanoshada/main/ss/d7228710f52a957f05a7ee5e3aa51d8e.jpg)
+
+
+## Table of Contents
+
+- [Features](#features)
+- [Installation](#installation)
+- [Usage](#usage)
+  - [Importing the Package](#importing-the-package)
+  - [Predefined Pyramid Example](#predefined-pyramid-example)
+  - [Custom Pyramid Example](#custom-pyramid-example)
+  - [List Available Pyramids](#list-available-pyramids)
+  - [Comparing Multiple Pyramids](#comparing-multiple-pyramids)
+- [Mathematical Constants and Comparisons](#mathematical-constants-and-comparisons)
+  - [Detailed Analysis Output](#detailed-analysis-output)
+  - [CG (Center of Gravity)](#cg-center-of-gravity)
+- [Contributing](#contributing)
+- [License](#license)
 
 ## Features
 
@@ -36,7 +61,7 @@ You can use one of the predefined pyramids from the database:
 giza = Pyramid.from_database("great_pyramid_giza")
 
 # Perform detailed analysis
-giza.detailed_analysis()
+giza.detailed_analysis(json=False)
 ```
 
 This will output a detailed analysis of the Great Pyramid, including the comparison with mathematical constants like Pi, Golden Ratio, Tribonacci constant, and others.
@@ -134,7 +159,7 @@ The package compares the following constants:
 
 ### Detailed Analysis Output
 
-When running the `detailed_analysis()` method, you will get comprehensive output that compares various calculations of the pyramid to well-known mathematical constants.
+When running the `detailed_analysis(json=False)` method, you will get comprehensive output that compares various calculations of the pyramid to well-known mathematical constants.
 
 **Example Output:**
 
