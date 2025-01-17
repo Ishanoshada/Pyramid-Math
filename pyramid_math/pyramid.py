@@ -29,11 +29,11 @@ class Pyramid:
         )
 
     def pi_ratio(self):
-        return round(self.base_length_north / self.height, 4)
+        return round(self.base_length_north / self.height, 9)
 
     # Method to calculate golden ratio (approximate)
     def golden_ratio(self):
-        return round(self.base_length_north / self.height, 4)
+        return round(self.base_length_north / self.height, 9)
 
     # Static method to compare two pyramids by name
     @staticmethod
@@ -68,20 +68,38 @@ class Pyramid:
         }
 
         return comparison
+    
     def perform_special_calculations(self):
         pivalue = (self.base_length_north + self.base_length_east) / self.height
         goldenratio = calculate_edge(self.base_length_north, self.height) / (self.base_length_north / 2)
-        sqrt_goldenratio = calculate_apothem(self.base_length_east,self.height) / self.height
+        sqrt_goldenratio = calculate_apothem(self.base_length_east, self.height) / self.height
         slope_angle = calculate_slope_angle(self.base_length_north, self.height)
+
+        # Your methods
+        my_method_1 = (
+            math.sin(self.base_length_north / (self.base_length_east / 2) / self.height) * self.base_length_north
+        )
+        half_base = self.base_length_north / 2
+        my_method_2 = (
+            calculate_apothem(self.base_length_east, self.height)
+            - calculate_edge(self.base_length_north, self.height)
+            + (self.base_length_north / self.height * self.base_length_east / half_base)
+        )
+        edge = calculate_edge(self.base_length_north, self.height)
+        my_method_3 = abs(math.sin(math.log(self.base_length_east)) - edge) / half_base
+
         return {
             'pivalue': pivalue,
             'goldenratio': goldenratio,
             'sqrt_goldenratio': sqrt_goldenratio,
             'difference_from_pi': abs(pivalue - PI),
             'difference_from_phi': abs(goldenratio - PHI),
-            'slope_angle': slope_angle
-            
+            'slope_angle': slope_angle,
+            'my_method_1_pi': my_method_1,
+            'my_method_2_pi': my_method_2,
+            'my_method_3_golden_ratio': my_method_3,
         }
+
 
     def calculate_tribonacci_constant(self):
         """
@@ -169,26 +187,44 @@ class Pyramid:
 
         # Pi Value Comparison
         analysis["special_calculations"]["pi_value"] = {
-            "calculated": round(special_calcs['pivalue'], 4),
-            "actual": round(math.pi, 4),
-            "difference_from_pi": round(abs(special_calcs['pivalue'] - math.pi), 4)
+            "calculated": round(special_calcs['pivalue'], 9),
+            "actual": round(math.pi, 9),
+            "difference_from_pi": round(abs(special_calcs['pivalue'] - math.pi), 9)
         }
+
+         # Include new methods in the detailed analysis
+        analysis["special_calculations"]["my_method_1_pi"] = {
+            "calculated": round(special_calcs["my_method_1_pi"], 8),
+            "difference_from_pi": round(abs(special_calcs["my_method_1_pi"] - math.pi), 8),
+        }
+
+        analysis["special_calculations"]["my_method_2_pi"] = {
+            "calculated": round(special_calcs["my_method_2_pi"], 8),
+            "difference_from_pi": round(abs(special_calcs["my_method_2_pi"] - math.pi), 8),
+        }
+
 
         # Golden Ratio Comparison
         phi = (1 + np.sqrt(5)) / 2
         analysis["special_calculations"]["golden_ratio"] = {
-            "calculated": round(special_calcs['goldenratio'], 4),
-            "actual": round(phi, 4),
-            "difference_from_phi": round(abs(special_calcs['goldenratio'] - phi), 4)
+            "calculated": round(special_calcs['goldenratio'], 9),
+            "actual": round(phi, 9),
+            "difference_from_phi": round(abs(special_calcs['goldenratio'] - phi), 9)
         }
 
         # Square Root of Golden Ratio Comparison
         sqrt_phi = np.sqrt(phi)
         analysis["special_calculations"]["sqrt_golden_ratio"] = {
-            "calculated": round(special_calcs['sqrt_goldenratio'], 4),
-            "actual": round(sqrt_phi, 4),
-            "difference_from_sqrt_phi": round(abs(special_calcs['sqrt_goldenratio'] - sqrt_phi), 4)
+            "calculated": round(special_calcs['sqrt_goldenratio'], 9),
+            "actual": round(sqrt_phi, 9),
+            "difference_from_sqrt_phi": round(abs(special_calcs['sqrt_goldenratio'] - sqrt_phi), 9)
         }
+
+        analysis["special_calculations"]["my_method_3_golden_ratio"] = {
+            "calculated": round(special_calcs["my_method_3_golden_ratio"], 8),
+            "difference_from_Golden_ratio": round(abs(special_calcs["my_method_3_golden_ratio"] - ((1 + np.sqrt(5)) / 2) ), 8),
+        }
+        
 
         # Slope Angle
         analysis["special_calculations"]["slope_angle"] = round(special_calcs['slope_angle'], 2)
@@ -196,41 +232,44 @@ class Pyramid:
         # CG and Base Length Comparison
         cg_ratio, cg_difference = self.compare_CG_base_length()
         analysis["special_calculations"]["cg_base_length_comparison"] = {
-            "calculated": round(cg_ratio, 4),
-            "difference_from_sqrt2": round(cg_difference, 4)
+            "calculated": round(cg_ratio, 9),
+            "difference_from_sqrt2": round(cg_difference, 9)
         }
 
         # Tribonacci Constant Calculation and Comparison
         tribonacci_constant, tribonacci_difference = self.compare_tribonacci_constant()
         analysis["special_calculations"]["tribonacci_constant"] = {
-            "calculated": round(tribonacci_constant, 4),
+            "calculated": round(tribonacci_constant, 9),
             "actual": 1.8393,
-            "difference_from_tribonacci_constant": round(tribonacci_difference, 4)
+            "difference_from_tribonacci_constant": round(tribonacci_difference, 9)
         }
 
         # Root 5 Calculation and Comparison
         root_5_ratio, root_5_difference = self.compare_root_5()
         analysis["special_calculations"]["root_5_comparison"] = {
-            "calculated": round(root_5_ratio, 4),
-            "actual": round(np.sqrt(5), 4),
-            "difference_from_sqrt5": round(root_5_difference, 4)
+            "calculated": round(root_5_ratio, 9),
+            "actual": round(np.sqrt(5), 9),
+            "difference_from_sqrt5": round(root_5_difference, 9)
         }
 
         # Root 3 Calculation and Comparison
         root_3_ratio, root_3_difference = self.compare_root_3()
         analysis["special_calculations"]["root_3_comparison"] = {
-            "calculated": round(root_3_ratio, 4),
-            "actual": round(np.sqrt(3), 4),
-            "difference_from_sqrt3": round(root_3_difference, 4)
+            "calculated": round(root_3_ratio, 9),
+            "actual": round(np.sqrt(3), 9),
+            "difference_from_sqrt3": round(root_3_difference, 9)
         }
 
         # Golden Ratio - 1 Comparison
         golden_ratio_minus_1_ratio, golden_ratio_minus_1_difference = self.compare_golden_ratio_minus_1()
         analysis["special_calculations"]["golden_ratio_minus_1_comparison"] = {
-            "calculated": round(golden_ratio_minus_1_ratio, 4),
-            "actual": round(phi - 1, 4),
-            "difference_from_phi_minus_1": round(golden_ratio_minus_1_difference, 4)
+            "calculated": round(golden_ratio_minus_1_ratio, 9),
+            "actual": round(phi - 1, 9),
+            "difference_from_phi_minus_1": round(golden_ratio_minus_1_difference, 9)
         }
+
+       
+        
 
         # Return JSON if specified
         if json:
@@ -247,8 +286,8 @@ class Pyramid:
                 print(f"\n{key.replace('_', ' ').capitalize()}:")
                 if isinstance(value, dict):
                     for sub_key, sub_value in value.items():
-                        print(f"  {sub_key.replace('_', ' ').capitalize()}: {sub_value:.4f}")
+                        print(f"  {sub_key.replace('_', ' ').capitalize()}: {sub_value:.9f}")
                 else:
-                    print(f"  {key.replace('_', ' ').capitalize()}: {value:.4f}")
+                    print(f"  {key.replace('_', ' ').capitalize()}: {value:.9f}")
 
             return None

@@ -215,6 +215,66 @@ PYRAMID_DATABASE = {
         "base_length_north": 175.0,  # in feet
         "base_length_east": 175.0,  # in feet
         "height": 150.0  # in feet
+    },
+        "pyramid_of_the_serpent": {
+        "name": "Pyramid of the Serpent",
+        "base_length_north": 300.0,  # in feet
+        "base_length_east": 300.0,  # in feet
+        "height": 200.0  # in feet
+    },
+    "caral_pyramid_peru": {
+        "name": "Caral Pyramid (Peru)",
+        "base_length_north": 500.0,  # in feet
+        "base_length_east": 500.0,  # in feet
+        "height": 100.0  # in feet
+    },
+    "pyramid_of_the_falcon": {
+        "name": "Pyramid of the Falcon",
+        "base_length_north": 275.0,  # in feet
+        "base_length_east": 275.0,  # in feet
+        "height": 150.0  # in feet
+    },
+    "pyramid_of_inti": {
+        "name": "Pyramid of Inti (Sun God)",
+        "base_length_north": 400.0,  # in feet
+        "base_length_east": 400.0,  # in feet
+        "height": 300.0  # in feet
+    },
+    "pyramid_of_the_earth": {
+        "name": "Pyramid of the Earth",
+        "base_length_north": 250.0,  # in feet
+        "base_length_east": 250.0,  # in feet
+        "height": 175.0  # in feet
+    },
+    "temple_of_the_falcon": {
+        "name": "Temple of the Falcon",
+        "base_length_north": 275.0,  # in feet
+        "base_length_east": 275.0,  # in feet
+        "height": 200.0  # in feet
+    },
+    "moche_pyramid_of_the_sun": {
+        "name": "Moche Pyramid of the Sun",
+        "base_length_north": 550.0,  # in feet
+        "base_length_east": 550.0,  # in feet
+        "height": 130.0  # in feet
+    },
+    "moche_pyramid_of_the_moon": {
+        "name": "Moche Pyramid of the Moon",
+        "base_length_north": 500.0,  # in feet
+        "base_length_east": 500.0,  # in feet
+        "height": 110.0  # in feet
+    },
+    "mesoamerican_pyramid_of_the_jaguar": {
+        "name": "Mesoamerican Pyramid of the Jaguar",
+        "base_length_north": 300.0,  # in feet
+        "base_length_east": 300.0,  # in feet
+        "height": 220.0  # in feet
+    },
+    "zimbabwe_pyramid_ruins": {
+        "name": "Great Zimbabwe Pyramid Ruins",
+        "base_length_north": 100.0,  # in feet
+        "base_length_east": 100.0,  # in feet
+        "height": 60.0  # in feet
     }
-    # Additional pyramids can be added as needed...
+
 }

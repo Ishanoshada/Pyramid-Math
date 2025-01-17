@@ -175,6 +175,7 @@ Special Calculations vs Mathematical Constants:
 Actual π value = 3.1416
 Difference from π = 0.0038
 
+
 Edge / (Base length / 2) = 1.6180
 Actual φ (Golden Ratio) = 1.6180
 Difference from φ = 0.0000
@@ -203,6 +204,19 @@ Difference from √3 = 0.0000
 Apothem / (Apothem + Half Base Length) = 0.6180
 Actual φ - 1 = 0.6180
 Difference from φ - 1 = 0.0000
+
+My method 1 pi:
+Calculated: 3.143442090
+Difference from pi: 0.001849430
+
+My method 2 pi:
+Calculated: 3.143451140
+Difference from pi: 0.001858490
+
+My method 3 golden ratio:
+Calculated: 1.617506900
+Difference from golden ratio: 0.000527090
+  
 ```
 
 ### CG (Center of Gravity)
